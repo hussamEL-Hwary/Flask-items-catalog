@@ -20,3 +20,9 @@ class User(Base):
 
     def verify_password(self, password):
         return pwd_context.verify(password, self.password)
+
+
+class Category(Base):
+    __tablename__ = 'category'
+    id = Column(Integer, primary_key=True)
+    name = Column(String, index=True)
