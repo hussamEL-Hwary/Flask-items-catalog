@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, flash, jsonify
+from flask import Flask, render_template, request, flash, jsonify, abort
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from model import Base, User, Category, Item
@@ -20,6 +20,19 @@ def home():
     return render_template('home.html',
                            categories=category_controller.get_categories,
                            latest_items=item_controller.get_latest_items)
+
+
+@app.route('/catalog/<string:category>/items')
+def category_items(category):
+    items = item_controller.get_items_in_category(category)
+    return render_template('items.html', items=items, category=category,
+                           categories=category_controller.get_categories,
+                           items_length=len(items))
+
+
+@app.errorhandler(404)
+def page_not_found(e):
+    return render_template('404.html'), 404
 
 
 if __name__ == '__main__':
