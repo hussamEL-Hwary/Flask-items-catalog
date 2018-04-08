@@ -1,3 +1,4 @@
+from flask import abort
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from model import Base, Category
@@ -13,3 +14,11 @@ class CategoryController():
     @property
     def get_categories(self):
         return session.query(Category).all()
+
+    def get_category_id(self, category):
+        category_id = None
+        try:
+            category_id = session.query(Category.id).filter_by(name=category).one()
+        except:
+            abort(404)
+        return category_id[0]
