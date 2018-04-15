@@ -1,10 +1,11 @@
-from flask import Flask, render_template, request, flash, jsonify, abort
+from flask import Flask, render_template, request, flash, jsonify, abort, redirect, url_for
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from model import Base, User, Category, Item
 from category_controller import CategoryController
 from item_controller import ItemController
-
+from forms import SignupForm
+from user_controller import UserController
 
 app = Flask(__name__)
 engine = create_engine('sqlite:///catalog.db')
@@ -13,6 +14,21 @@ DBSession = sessionmaker(bind=engine)
 session = DBSession()
 category_controller = CategoryController()
 item_controller = ItemController()
+user_controller = UserController()
+
+
+# sign up user
+
+@app.route('/signup', methods=['GET', 'POST'])
+def signup():
+    signup_form = SignupForm(request.form)
+    if request.method == 'POST' and signup_form.validate():
+        user = User(username=signup_form.name.data, email=signup_form.email.data)
+        user.hash_password(signup_form.password.data)
+        user_controller.create_user(user)
+        return redirect(url_for('home'))
+
+    return render_template('signup.html', form=signup_form)
 
 
 @app.route('/')
