@@ -4,12 +4,11 @@ from sqlalchemy.orm import relationship, sessionmaker
 from sqlalchemy import create_engine
 from sqlalchemy.sql import func
 from passlib.apps import custom_app_context as pwd_context
-
-
+from flask_login import UserMixin
 Base = declarative_base()
 
 
-class User(Base):
+class User(Base, UserMixin):
     """
         Class user maps user properties to DB table
 
