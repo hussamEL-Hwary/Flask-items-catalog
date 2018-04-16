@@ -163,6 +163,14 @@ def gconnect():
     return redirect(url_for('home'))
 
 
+# logout user
+@app.route('/logout')
+@login_required
+def logout():
+    logout_user()
+    return redirect(url_for('home'))
+
+
 @app.route('/')
 def home():
     return render_template('home.html',
