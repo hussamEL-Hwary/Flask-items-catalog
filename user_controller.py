@@ -3,7 +3,6 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from model import Base, Category, User
 
-
 engine = create_engine('sqlite:///catalog.db')
 Base.metadata.bind = engine
 DBSession = sessionmaker(bind=engine)
@@ -17,3 +16,7 @@ class UserController():
         """add new user in database"""
         session.add(user)
         session.commit()
+
+
+    def get_user_by_email(self, email):
+        return session.query(User).filter_by(email=email).first()
