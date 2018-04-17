@@ -4,16 +4,62 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=Cairo" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+      <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js">
+      </script>
+    <script src="//apis.google.com/js/platform.js?onload=start"> </script>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     <title> {% block title %} {% endblock %} </title>
 
 </head>
 <body>
+
+ <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="{{ url_for('home') }}">Catalog</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+     </button>
+     {% if current_user.is_authenticated %}
+         <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class=" navbar-nav navbar-right">
+			    <li class="nav-item">
+                    <h4>Hi {{ current_user.username }}!</h4>
+                </li>
+                <li class="nav-item">
+                    <a class='nav-link login-lin' href="{{ url_for('logout') }}">Logout</a>
+                </li>
+        </ul>
+        </div>
+     {% else %}
+       <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class=" navbar-nav navbar-right">
+			    <li class="nav-item">
+                    <a class='nav-link' href="{{ url_for('signup') }}">SignUp</a>
+                </li>
+                <li class="nav-item">
+                    <a class='nav-link login-lin' href="{{ url_for('login') }}">Login</a>
+                </li>
+        </ul>
+     </div>
+     {% endif %}
+
+
+    </nav>
+
     <main class="container">
         {% block container %}
         {% endblock %}
     </main>
+
+
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+
 </body>
 </html>
