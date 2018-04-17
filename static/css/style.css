@@ -1,0 +1,55 @@
+body {
+  background: #edeff1;
+  font-family: 'Cairo', sans-serif;
+}
+
+/* nav bar section*/
+.navbar-right {
+  margin-left: 77%;
+}
+
+.navbar-brand {
+    font-size: 150%;
+    margin-left: 2%;
+    color: #afe2ca;
+}
+
+.nav-link {
+    font-size: 21px;
+    color: #ccdcde;
+}
+
+.nav-item h4 {
+    color: #fff;
+    margin-top: 6%;
+}
+
+/* login section  */
+.login-lin{
+     margin-left: 25%;
+}
+
+.login {
+    margin: 0 auto;
+    background-color: #ffffff;
+    margin-top: 5%;
+}
+
+.login h3 {
+    color: #214e6d;
+}
+
+.log-input {
+    margin-top: 5%;
+}
+
+.log-or {
+    font-size: 20px;
+    font-weight: bold;
+    color: #5a1616;
+}
+
+.google-button {
+    text-align: center;
+    margin-top: 4%;
+}
