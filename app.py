@@ -12,7 +12,7 @@ import httplib2
 import json
 
 # forms
-from forms import SignupForm, LoginForm
+from forms import SignupForm, LoginForm, NewItemForm
 
 # controllers
 from category_controller import CategoryController
@@ -195,6 +195,25 @@ def show_item(category, item_title):
     return render_template('item.html', item=item)
 
 
+# add item in category
+@app.route('/catalog/new', methods=['GET', 'POST'])
+@login_required
+def add_item():
+    new_item_form = NewItemForm(request.form)
+    new_item_form.category.choices = [(cat.id, cat.name) for cat in session.query(Category).all()]
+    if request.method == 'POST' and new_item_form.validate():
+        item = Item(title=new_item_form.title.data,
+                    description=new_item_form.description.data,
+                    category_id=new_item_form.category.data,
+                    user_id=current_user.id)
+        item_controller.create_item(item)
+        flash("new Item successfully added")
+        return redirect(url_for('home'))
+
+    return render_template('new_item.html', form=new_item_form)
+
+
+# handel 404 error
 @app.errorhandler(404)
 def page_not_found(e):
     return render_template('404.html'), 404
