@@ -12,11 +12,23 @@ session = DBSession()
 
 
 class ItemController():
+    """ ItemController class that contains methods
+        related to item
+    """
+
+    # get last added 10 items
     @property
     def get_latest_items(self):
         return session.query(Item).order_by(desc(Item.time_created))\
             .limit(10)
 
+    # get all items in specific category
     def get_items_in_category(self, category):
         return session.query(Item).filter_by(
             category_id=category_controller.get_category_id(category)).all()
+
+    # get item by category name and item title
+    def get_item_in_category(self, category, item_title):
+        return session.query(Item).filter_by(
+            category_id=category_controller.get_category_id(category),
+            title=item_title).first()
