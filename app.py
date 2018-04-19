@@ -186,6 +186,15 @@ def category_items(category):
                            items_length=len(items))
 
 
+# show item in category
+@app.route('/catalog/<string:category>/<string:item_title>')
+def show_item(category, item_title):
+    item = item_controller.get_item_in_category(category, item_title)
+    if item is None:
+        abort(404)
+    return render_template('item.html', item=item)
+
+
 @app.errorhandler(404)
 def page_not_found(e):
     return render_template('404.html'), 404
