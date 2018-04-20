@@ -37,3 +37,8 @@ class ItemController():
     def create_item(self, item):
         session.add(item)
         session.commit()
+
+    # delete item from db
+    def delete_item(self, item):
+        session.delete(item)
+        session.commit()
