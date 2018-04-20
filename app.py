@@ -213,6 +213,20 @@ def add_item():
     return render_template('new_item.html', form=new_item_form)
 
 
+# delete item
+@app.route('/catalog/<string:category>/<string:item_title>/delete',methods=['GET', 'POST'])
+@login_required
+def delete_item(category, item_title):
+    item = item_controller.get_item_in_category(category, item_title)
+    if item is None:
+        abort(404)
+    if request.method == 'POST' and current_user.id == item.user.id:
+        item_controller.delete_item(item)
+        flash("item successfully deleted")
+        return redirect(url_for('home'))
+    return render_template('confirm_delete.html', item=item)
+
+
 # handel 404 error
 @app.errorhandler(404)
 def page_not_found(e):
