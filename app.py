@@ -233,6 +233,12 @@ def page_not_found(e):
     return render_template('404.html'), 404
 
 
+# handel 401 error
+@app.errorhandler(401)
+def permission_denied(e):
+    return render_template('401.html'), 401
+
+
 if __name__ == '__main__':
     app.secret_key = 'secret_key'
     app.debug = True
