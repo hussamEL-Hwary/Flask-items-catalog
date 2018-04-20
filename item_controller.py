@@ -32,3 +32,8 @@ class ItemController():
         return session.query(Item).filter_by(
             category_id=category_controller.get_category_id(category),
             title=item_title).first()
+
+    # add new item to db
+    def create_item(self, item):
+        session.add(item)
+        session.commit()
