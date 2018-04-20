@@ -1,0 +1,18 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+    401 | permission denied.
+{% endblock %}
+
+{% block container %}
+<div class="row">
+    <div class="col-md-12 error">
+        <div class="text-center error-title">
+            Permission denied
+        </div>
+        <a href="{{ url_for('home') }}" class="btn btn-success">
+        Back To Home
+        </a>
+    </div>
+</div>
+{% endblock %}
