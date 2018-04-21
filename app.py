@@ -227,6 +227,37 @@ def delete_item(category, item_title):
     return render_template('confirm_delete.html', item=item)
 
 
+# edit item
+@app.route('/catalog/<string:category>/<string:item_title>/edit',
+           methods=['GET', 'POST'])
+@login_required
+def edit_item(category, item_title):
+    edit_item_form = NewItemForm(request.form)
+    edit_item_form.category.choices = [(cat.id, cat.name) for cat in session.query(Category).all()]
+    # get item if there is no item abort 404 error
+    item = item_controller.get_item_in_category(category, item_title)
+    if item is None:
+        abort(404)
+
+    # validate form and check if logged in user who created the item
+    if request.method == 'POST' and edit_item_form.validate()\
+            and current_user.id == item.user.id:
+        # set item new values and save
+        item.title = edit_item_form.title.data
+        item.description = edit_item_form.description.data
+        item.category_id = edit_item_form.category.data
+        item_controller.create_item(item)
+        flash("item successfully edited")
+        return redirect(url_for('home'))
+
+    # init form default values
+    edit_item_form.title.default = item.title
+    edit_item_form.description.default = item.description
+    edit_item_form.category.default = item.category.id
+    edit_item_form.process()
+    return render_template('edit_item.html', form=edit_item_form, item=item)
+
+
 # JSON Endpoints
 
 @app.route('/category.json')
