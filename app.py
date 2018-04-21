@@ -241,6 +241,13 @@ def items_json():
     return jsonify(items=[item.serialize for item in items])
 
 
+@app.route('/item/<string:category>.json')
+def category_items_json(category):
+    items = session.query(Item).filter_by(
+            category_id=category_controller.get_category_id(category)).all()
+    return jsonify(items=[item.serialize for item in items])
+
+
 # handel 404 error
 @app.errorhandler(404)
 def page_not_found(e):
