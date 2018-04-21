@@ -20,5 +20,5 @@ class CategoryController():
         try:
             category_id = session.query(Category.id).filter_by(name=category).one()
         except:
-            abort(404)
+            return None
         return category_id[0]
