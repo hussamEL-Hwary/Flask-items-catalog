@@ -45,6 +45,14 @@ class Category(Base):
     id = Column(Integer, primary_key=True)
     name = Column(String, index=True)
 
+    # return category in serializable format
+    @property
+    def serialize(self):
+        return {
+            'id': self.id,
+            'name': self.name
+        }
+
 
 class Item(Base):
     """
@@ -67,6 +75,15 @@ class Item(Base):
     category_id = Column(Integer, ForeignKey('category.id'))
     user = relationship(User)
     category = relationship(Category)
+
+    @property
+    def serialize(self):
+        return {
+            'id': self.id,
+            'title': self.title,
+            'description': self.description,
+            'category': self.category.name
+        }
 
 
 engine = create_engine('sqlite:///catalog.db')
