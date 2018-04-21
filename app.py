@@ -49,8 +49,9 @@ CLIENT_ID = json.loads(
 def is_safe_url(target):
     ref_url = urlparse(request.host_url)
     test_url = urlparse(urljoin(request.host_url, target))
-    return test_url.scheme in ('http', 'https') and \
-           ref_url.netloc == test_url.netloc
+    return \
+        test_url.scheme in ('http', 'https') and \
+        ref_url.netloc == test_url.netloc
 
 
 # load user
@@ -68,7 +69,8 @@ def signup():
 
     signup_form = SignupForm(request.form)
     if request.method == 'POST' and signup_form.validate():
-        user = User(username=signup_form.name.data, email=signup_form.email.data)
+        user = User(username=signup_form.name.data,
+                    email=signup_form.email.data)
         user.hash_password(signup_form.password.data)
         user_controller.create_user(user)
         return redirect(url_for('home'))
@@ -150,7 +152,8 @@ def gconnect():
     user = user_controller.get_user_by_email(email)
     if user is None:
         user = User(username=username, email=email)
-        random_password = ''.join(random.choice(string.ascii_uppercase+string.digits)
+        random_password = ''.join(random.choice(
+            string.ascii_uppercase+string.digits)
                                   for x in xrange(16))
         user.hash_password(random_password)
         user_controller.create_user(user)
@@ -200,7 +203,9 @@ def show_item(category, item_title):
 @login_required
 def add_item():
     new_item_form = NewItemForm(request.form)
-    new_item_form.category.choices = [(cat.id, cat.name) for cat in session.query(Category).all()]
+    new_item_form.category.choices = \
+        [(cat.id, cat.name) for cat in session.query(Category).all()]
+
     if request.method == 'POST' and new_item_form.validate():
         item = Item(title=new_item_form.title.data,
                     description=new_item_form.description.data,
@@ -214,7 +219,8 @@ def add_item():
 
 
 # delete item
-@app.route('/catalog/<string:category>/<string:item_title>/delete', methods=['GET', 'POST'])
+@app.route('/catalog/<string:category>/<string:item_title>/delete',
+           methods=['GET', 'POST'])
 @login_required
 def delete_item(category, item_title):
     item = item_controller.get_item_in_category(category, item_title)
@@ -233,7 +239,8 @@ def delete_item(category, item_title):
 @login_required
 def edit_item(category, item_title):
     edit_item_form = NewItemForm(request.form)
-    edit_item_form.category.choices = [(cat.id, cat.name) for cat in session.query(Category).all()]
+    edit_item_form.category.choices = \
+        [(cat.id, cat.name) for cat in session.query(Category).all()]
     # get item if there is no item abort 404 error
     item = item_controller.get_item_in_category(category, item_title)
     if item is None:
