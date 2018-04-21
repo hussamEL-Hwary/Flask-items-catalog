@@ -1,9 +1,23 @@
+html,
+body {
+  height: 100%;
+}
+
 body {
   background: #edeff1;
   font-family: 'Cairo', sans-serif;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  font-weight: 100;
 }
 
+/*//////////////////////////////////////////////////*/
 /* nav bar section*/
+nav {
+    font-family: 'Lobster', cursive;
+}
+
 .navbar-right {
   margin-left: 77%;
 }
@@ -24,6 +38,7 @@ body {
     margin-top: 6%;
 }
 
+/*//////////////////////////////////////////////////*/
 /* login section  */
 .login-lin{
      margin-left: 25%;
@@ -53,3 +68,96 @@ body {
     text-align: center;
     margin-top: 4%;
 }
+
+/*//////////////////////////////////////////////////*/
+/* home section */
+.home {
+    margin: 0 auto;
+    margin-top: 3%;
+    background-color: #ffffff;
+}
+
+.latest-head h2 {
+    font-family: 'Lobster', cursive;
+    color: #076140;;
+}
+
+.category {
+    border-right-style: solid;
+    border-right-color: #614a4a;
+    border-right-width: 1px;
+}
+
+.category h2 {
+    font-family: 'Lobster', cursive;
+    color: #076140;;
+}
+.hv :hover{
+    background-color: #335a27;
+}
+
+.link {
+  text-decoration: none;
+  color: #333;
+}
+
+.link:hover {
+  color: #333;
+}
+
+.box {
+    text-align: center;
+    background-color: #c1e0d2;
+    border-radius: 5px;
+    padding: 1px 0 16%;
+    height: 75%;
+    margin-top: 10%;
+    margin-bottom: 5%;
+    transition: all .6s ease-in-out;
+    cursor: pointer;
+    -webkit-box-shadow: 15px 10px 23px 1px rgba(0,0,0,0.75);
+    -moz-box-shadow: 15px 10px 23px 1px rgba(0,0,0,0.75);
+    box-shadow: 15px 10px 23px 1px rgba(0,0,0,0.75);
+}
+
+.box:hover {
+  background-color: #d39999;
+  color: rgb(24, 15, 15);
+}
+
+.box h3 {
+  border-bottom: 1px solid #f1e2e2;
+  padding-bottom: 15px;
+  font-weight: 900;
+}
+
+.box p {
+  max-width: 95%;
+  margin: 0 auto;
+  padding: 0 15px;
+  margin-top: 5%;
+  font-family: 'Lobster', cursive;
+}
+
+
+.item-action {
+    margin-top: 5%;
+    margin-bottom: 3%;
+}
+
+.edit {
+    margin-right: 2%;
+    width: 10%;
+}
+
+/*//////////////////////////////////////////////////*/
+/* error */
+.error {
+    margin-top: 10%;
+    text-align: center;
+}
+
+.error-title {
+    font-size: 72px;
+}
+
