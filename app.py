@@ -235,6 +235,12 @@ def categories_json():
     return jsonify(categories=[cat.serialize for cat in categories])
 
 
+@app.route('/item.json')
+def items_json():
+    items = session.query(Item).all()
+    return jsonify(items=[item.serialize for item in items])
+
+
 # handel 404 error
 @app.errorhandler(404)
 def page_not_found(e):
