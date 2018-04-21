@@ -214,7 +214,7 @@ def add_item():
 
 
 # delete item
-@app.route('/catalog/<string:category>/<string:item_title>/delete',methods=['GET', 'POST'])
+@app.route('/catalog/<string:category>/<string:item_title>/delete', methods=['GET', 'POST'])
 @login_required
 def delete_item(category, item_title):
     item = item_controller.get_item_in_category(category, item_title)
@@ -225,6 +225,14 @@ def delete_item(category, item_title):
         flash("item successfully deleted")
         return redirect(url_for('home'))
     return render_template('confirm_delete.html', item=item)
+
+
+# JSON Endpoints
+
+@app.route('/category.json')
+def categories_json():
+    categories = session.query(Category).all()
+    return jsonify(categories=[cat.serialize for cat in categories])
 
 
 # handel 404 error
