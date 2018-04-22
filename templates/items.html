@@ -1,0 +1,50 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+    Catalog
+{% endblock %}
+
+{% block container %}
+
+    <div class="row home">
+        <div class="col-md-3 category">
+            <h2 class="text-center">Categories</h2>
+            <div class="">
+
+                {% for cat in categories %}
+                <a href="{{ url_for('category_items',category=cat.name) }}" class="hv">
+                    <h3><span class="badge badge-primary btn-block">{{ cat.name }}</span></h3>
+                </a>
+
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="col-md-9">
+            <div class="latest-head">
+
+                <h2 class="text-center">Items In {{ category }} <strong>({{ items_length }})</strong> </h2>
+                {% if current_user.is_authenticated  %}
+                    <form method="get" action="{{ url_for('add_item') }}">
+                <input type="submit" class="btn btn-success"  value="add new item">
+                </form>
+                {% endif %}
+            </div>
+            <div class="row">
+              {% for item in items %}
+                    <div class="col-sm-4">
+                        <a class='link' href="{{ url_for('show_item', category=item.category.name,
+                         item_title=item.title) }}">
+                            <div class='box'>
+                            <h3 class="text-uppercase" >{{ item.title }}</h3>
+                                <p>In {{ item.category.name }}<p>
+                                <p>By {{ item.user.username }}<p>
+                            </div>
+                        </a>
+                    </div>
+              {% endfor %}
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
