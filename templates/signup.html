@@ -1,0 +1,61 @@
+{% extends 'layout.html' %}
+{% block title %} signup user {% endblock %}
+
+{% block container %}
+    <div class="row">
+        <div class="col-md-8 home">
+
+        <h2 class="text-center edit-head">sign up</h2>
+        <div class="">
+            <form method="post" action="{{ url_for('signup') }}">
+                <div class="form-inline form-group above-input">
+                <label class="up-name">name:</label>{{ form.name( class='form-control up-name-input', placeholder='your name') }}
+                </div>
+                <div class="text-center">
+                {% if form.name.errors %}
+                    <span class="text-danger">
+                        {% for error in form.name.errors %}
+                            <strong>{{ error }}</strong>
+                        {% endfor %}
+                    </span>
+                {% endif %}
+                </div>
+                <div class="form-inline form-group above-input">
+                    <label class="up-email">Email:</label>{{ form.email( class='form-control up-email-input', placeholder='email') }}
+                </div>
+                <div class="text-center">
+                {% if form.email.errors %}
+                    <span class="text-danger">
+                        {% for error in form.email.errors %}
+                            <strong>{{ error }}</strong>
+                        {% endfor %}
+                    </span>
+                {% endif %}
+                </div>
+
+                <div class="form-inline form-group above-input">
+                 <label class="up-pass">password:</label>{{ form.password(class='form-control up-pass-input', placeholder='password') }}
+                </div>
+                <div class="text-center">
+                {% if form.password.errors %}
+                    <span class="text-danger">
+                        {% for error in form.password.errors %}
+                            <strong>{{ error }}</strong>
+                        {% endfor %}
+                    </span>
+                {% endif %}
+                </div>
+
+                <div class="form-inline form-group above-input">
+                <label class="up-confirm">Confirm password</label> {{ form.confirm(class='form-control up-confirm-input', placeholder='confirm password') }}
+                </div>
+                {{ form.csrf_token }}
+
+                <div class="text-center above-input">
+                <input type="submit" class="btn btn-primary" value="SignUp">
+                </div>
+            </form>
+        </div>
+        </div>
+    </div>
+{% endblock %}
