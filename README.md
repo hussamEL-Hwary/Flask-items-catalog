@@ -45,3 +45,4 @@ python lots_of_data.py
 ```
 python app.py
 ```
+then open your browser and visit [http://localhost:8000](http://localhost:8000)
