@@ -17,6 +17,5 @@ class UserController():
         session.add(user)
         session.commit()
 
-
     def get_user_by_email(self, email):
         return session.query(User).filter_by(email=email).first()

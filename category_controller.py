@@ -18,7 +18,8 @@ class CategoryController():
     def get_category_id(self, category):
         category_id = None
         try:
-            category_id = session.query(Category.id).filter_by(name=category).one()
+            category_id = session.query(Category.id).\
+                filter_by(name=category).one()
         except:
             return None
         return category_id[0]

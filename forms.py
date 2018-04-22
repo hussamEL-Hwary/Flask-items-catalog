@@ -21,22 +21,24 @@ class SignupForm(Form):
         confirm: user password confirmation
     """
     name = StringField(
-        'name', validators=
-        [DataRequired(), Length(min=2, max=32,
-         message="length must be between 2 to 32 characters")])
+        'name', validators=[
+            DataRequired(),
+            Length(min=2, max=32,
+                   message="length must be between 2 to 32 characters")])
 
     email = StringField(
-        'email', validators=
-        [Required(message="email required"),
-         Email(message="invalid email address"),
-         Unique(User, User.email,
-         message='There is already an account with that email.')])
+        'email', validators=[
+            Required(message="email required"),
+            Email(message="invalid email address"),
+            Unique(User, User.email,
+                   message='There is already an account with that email.')])
 
     password = PasswordField(
-        'password', validators=
-        [DataRequired(message="password required"),
-         EqualTo('confirm', message="password must match"),
-         Length(min=6, message="password length must be more than 6 characters")])
+        'password', validators=[
+            DataRequired(message="password required"),
+            EqualTo('confirm', message="password must match"),
+            Length(min=6,
+                   message="password length must be more than 6 characters")])
 
     confirm = PasswordField('password repeat')
 
@@ -49,12 +51,13 @@ class LoginForm(Form):
         email: user email
     """
     email = StringField(
-        'email', validators=
-        [Required(message="email Required"),
-         Email("invalid email address")])
+        'email', validators=[
+            Required(message="email Required"),
+            Email("invalid email address")])
 
-    password = PasswordField('password', validators=
-        [DataRequired(message="password required")])
+    password = PasswordField(
+        'password', validators=[
+            DataRequired(message="password required")])
 
     def __init__(self, *args, **kwargs):
         Form.__init__(self, *args, **kwargs)
@@ -87,17 +90,16 @@ class NewItemForm(Form):
             category: category that item belongs to
         """
     title = StringField(
-        'title', validators=
-        [DataRequired(message="title required"),
-         Length(min=5,
-                message="title must be at least 5 characters")])
+        'title', validators=[
+            DataRequired(message="title required"),
+            Length(min=5, message="title must be at least 5 characters")])
 
     description = TextAreaField(
-        'description', validators=
-        [DataRequired(message="description required"),
-         Length(min=10,
-                message="description must be at least 10 characters")])
+        'description', validators=[
+            DataRequired(message="description required"),
+            Length(min=10,
+                   message="description must be at least 10 characters")])
 
     category = SelectField(
-        'category', validators=
-        [DataRequired(message="select category")], coerce=int)
+        'category', validators=[
+            DataRequired(message="select category")], coerce=int)

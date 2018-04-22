@@ -20,6 +20,7 @@ class Unique(object):
         self.message = message
 
     def __call__(self, form, field):
-        check = session.query(self.model).filter(self.field == field.data).first()
+        check = session.query(self.model).\
+            filter(self.field == field.data).first()
         if check:
             raise ValidationError(self.message)
