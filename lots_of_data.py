@@ -183,7 +183,7 @@ item = Item(title="Dunkirk",
                         "army from the beaches and harbor of Dunkirk, France, between "
                         "May 26- June 04, 1940, during Battle of France in World War II.",
             user_id=1,
-            category_id=9)
+            category_id=10)
 session.add(item)
 session.commit()
 
@@ -193,7 +193,7 @@ item = Item(title="Threads",
                         "city of Sheffield, England; and the eventual "
                         "long running effects of nuclear war on civilization.",
             user_id=1,
-            category_id=9)
+            category_id=10)
 session.add(item)
 session.commit()
 
@@ -205,7 +205,7 @@ item = Item(title="Glory",
                         "to kill commanding officers of blacks), and of his "
                         "own fellow officers.",
             user_id=1,
-            category_id=9)
+            category_id=10)
 session.add(item)
 session.commit()
 
