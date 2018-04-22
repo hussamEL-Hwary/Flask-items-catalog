@@ -26,6 +26,7 @@
                         {% endfor %}
                         </span>
                         {% endif %}
+                    {{ form.csrf_token }}
                     <input class="btn btn-success btn-block log-input"  type="submit" value="Login">
                 </form>
             </div>
