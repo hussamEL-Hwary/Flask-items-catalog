@@ -1,0 +1,68 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+   New Item
+{% endblock %}
+
+
+{% block container %}
+    <div class="row">
+    <div class="col-md-8 home">
+        <h3 class="text-center edit-head">Add New Item</h3>
+        <div class="form-group">
+
+        <form method="post" action="{{ url_for('add_item') }}">
+
+            <div class="form-inline form-group above-input">
+                <label class="title-head">title: </label>{{ form.title(class ="form-control title-input") }}
+            </div>
+
+            <div class="text-center">
+             {% if form.title.errors %}
+                            <span class="text-danger">
+                            {% for error in form.title.errors %}
+                                <strong>{{ error }}</strong>
+                            {% endfor %}
+                            </span>
+             {% endif %}
+            </div>
+
+            <div class="form-inline form-group above-input">
+                <label class="item-desc">description: </label> {{ form.description(class ="form-control desc-input") }}
+            </div>
+            <div class="text-center">
+                    {% if form.description.errors %}
+                            <span class="text-danger">
+                            {% for error in form.description.errors %}
+                                <strong>{{ error }}</strong>
+                            {% endfor %}
+                            </span>
+                    {% endif %}
+            </div>
+
+            <div class="form-inline form-group above-input">
+             <label class="cat-head">category: </label>  {{ form.category(class ="form-control cat-input") }}
+            </div>
+            <div class="text-center">
+                     {% if form.category.errors %}
+                            <span class="text-danger">
+                            {% for error in form.category.errors %}
+                                <strong>{{ error }}</strong>
+                            {% endfor %}
+                            </span>
+                    {% endif %}
+            </div>
+
+                {{ form.csrf_token }}
+
+            <div class="text-center above-input">
+               <input type="submit" class="btn btn-success" value="save">
+               <a class="btn btn-primary" href="{{ url_for('home') }}">cancel</a>
+            </div>
+        </form>
+            </div>
+    </div>
+
+    </div>
+
+{% endblock %}
