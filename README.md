@@ -2,31 +2,36 @@
 
 - [About](#about)
 - [Features](#features)
-- [How to run?](#How to run?)
+- [Launch](#Launch)
+
+### About
+ application that provides a list of items within a variety of categories as well as provide
+a user registration and authentication system. Registered users will have the ability to post,
+edit and delete their own items.
 
 ### Features
 
 | item catalog Features  |
 | :------------ |
-|Built with [Flask]()|
-|Uses [SQLAlchemy]() ORM|
+|Built with [Flask](http://flask.pocoo.org/)|
+|Uses [SQLAlchemy](https://www.sqlalchemy.org/) ORM|
 |Uses third party OAuth authentication|
-|Uses [WTForm]() to manage forms and CSRF protection|
-|Uses [Flask_login]() to manage login and logout|
-|Uses [Bootstrap]() to make the site responsive among diffrent screens|
+|Uses [WTForm](https://wtforms.readthedocs.io/) to manage forms and CSRF protection|
+|Uses [Flask_login](https://flask-login.readthedocs.io/) to manage login and logout|
+|Uses [Bootstrap](https://getbootstrap.com/) to make the site responsive among diffrent screens|
 
-### How to run?
+### Launch
 
 #### pre-installed
   * [Python ~2.7](https://www.python.org/)
-  * [Flask]()
-  * [WTForm]()
-  * [Flask_login]()
-  * [SQLAlchemy]()
-  * [Request]()
+  * [Flask](http://flask.pocoo.org/)
+  * [WTForm](https://wtforms.readthedocs.io/)
+  * [Flask_login](https://flask-login.readthedocs.io/)
+  * [SQLAlchemy](https://www.sqlalchemy.org/)
+  * [Request](http://docs.python-requests.org/en/master/)
 
 #### setup project
-cd to project directory run
+cd to project directory and run
 
 ```
 python model.py
