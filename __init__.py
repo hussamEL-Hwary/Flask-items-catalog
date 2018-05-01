@@ -30,7 +30,7 @@ from oauth2client.client import FlowExchangeError
 
 
 app = Flask(__name__)
-engine = create_engine('sqlite:///catalog.db')
+engine = create_engine('postgresql://catalog:password@localhost/catalog')
 Base.metadata.bind = engine
 DBSession = sessionmaker(bind=engine)
 session = DBSession()
@@ -42,7 +42,7 @@ login_manager.init_app(app)
 
 # google client secret
 CLIENT_ID = json.loads(
-    open('client_secrets.json', 'r').read())['web']['client_id']
+    open('/var/www/catalog/catalog/client_secrets.json', 'r').read())['web']['client_id']
 
 
 # check if url is safe
@@ -301,4 +301,4 @@ def permission_denied(e):
 if __name__ == '__main__':
     app.secret_key = 'secret_key'
     app.debug = True
-    app.run(host='0.0.0.0', port=8000)
+    app.run()

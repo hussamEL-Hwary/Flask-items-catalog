@@ -3,7 +3,7 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship, sessionmaker
 from sqlalchemy import create_engine
 from sqlalchemy.sql import func
-from passlib.apps import custom_app_context as pwd_context
+from passlib.apps import postgres_context as pwd_context
 from flask_login import UserMixin
 Base = declarative_base()
 
@@ -22,15 +22,15 @@ class User(Base, UserMixin):
     id = Column(Integer, primary_key=True)
     username = Column(String(32), index=True)
     email = Column(String)
-    password = Column(String(64))
+    password = Column(String(160))
 
     """convert password to hashed password"""
     def hash_password(self, password):
-        self.password = pwd_context.encrypt(password)
+        self.password = pwd_context.hash(password, user="catalog")
 
     """verify entered password against hashed password """
     def verify_password(self, password):
-        return pwd_context.verify(password, self.password)
+        return pwd_context.verify(password, self.password, user="catalog")
 
 
 class Category(Base):
@@ -86,5 +86,5 @@ class Item(Base):
         }
 
 
-engine = create_engine('sqlite:///catalog.db')
+engine = create_engine('postgresql://catalog:password@localhost/catalog')
 Base.metadata.create_all(engine)

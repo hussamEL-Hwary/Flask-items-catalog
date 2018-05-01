@@ -4,7 +4,7 @@ from model import Base, Item
 from category_controller import CategoryController
 
 
-engine = create_engine('sqlite:///catalog.db')
+engine = create_engine('postgresql://catalog:password@localhost/catalog')
 Base.metadata.bind = engine
 DBSession = sessionmaker(bind=engine)
 category_controller = CategoryController()
