@@ -1,8 +1,20 @@
 # flask
-from flask import Flask, render_template, request, flash,\
-    jsonify, abort, redirect, url_for
-from flask_login import LoginManager, UserMixin, login_required,\
-    login_user, logout_user, current_user
+from flask import (Flask,
+                   render_template,
+                   request,
+                   flash,
+                   jsonify,
+                   abort,
+                   redirect,
+                   url_for)
+
+from flask_login import (LoginManager,
+                         UserMixin,
+                         login_required,
+                         login_user,
+                         logout_user,
+                         current_user)
+
 from urlparse import urlparse, urljoin
 from flask import make_response
 import requests
